@@ -6,7 +6,14 @@ import { KEY_PASS_CONTRACT, TOKEN_CONTRACT } from "../const/addresses";
 import { ethers } from "ethers";
 import TokenClaim from "../components/token-claim";
 import PassClaim from "../components/pass-claim";
+import type {AppProps} from 'next/app';
+import Head from 'next/head';
+import {PrivyProvider} from '@privy-io/react-auth';
 
+
+// This method will be passed to the PrivyProvider as a callback
+// that runs after successful login.
+ 
 const Home: NextPage = () => {
   const address = useAddress();
 
@@ -33,7 +40,7 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <div className={styles.card}>
           <div className={styles.cardTitle}>
-            <h1>Base App</h1>
+            <h1>College Credit Issuing</h1>
             <ConnectWallet />
           </div>
           {!address ? (
@@ -42,7 +49,7 @@ const Home: NextPage = () => {
             !isTokenBalanceLoading ? (
               tokenBalance && parseInt(ethers.utils.formatUnits(tokenBalance.value, 18)) >= 10 ? (
                 !isKayPassBalanceLoading ? (
-                  keyPassBalance && parseInt(keyPassBalance[0].quantityOwned!) > 1 ? (
+                  keyPassBalance && keyPassBalance[0] && parseInt(keyPassBalance[0].quantityOwned!) >= 1 ? (
                     <>
                       <ClaimNFT />
                     </>
@@ -70,3 +77,6 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+
+

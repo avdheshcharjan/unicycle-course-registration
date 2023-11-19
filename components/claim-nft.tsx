@@ -28,7 +28,7 @@ export default function ClaimNFT() {
 
             const prize = await rewardContract?.erc721.signature.mint(signedPayload);
 
-            alert("NFT prize claimed!");
+            alert("Enrolled in Course!");
             return prize;
         } catch (error) {
             console.error(error);
@@ -36,11 +36,11 @@ export default function ClaimNFT() {
     };
     return (
         <>
-            <h3>Claim Base NFT</h3>
+            <h3>University Course Registration</h3>
             <Web3Button
                 contractAddress={REWARD_CONTRACT}
                 action={() => mintWithSignature()}
-            >Claim Reward</Web3Button>
+            >Register Course</Web3Button>
         </>
     );
 };
